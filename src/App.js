@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { IonApp, IonSplitPane, IonPage } from '@ionic/react';
+import '@ionic/core/css/core.css';
+import '@ionic/core/css/ionic.bundle.css';
+import './theme.css';
+import Menu from "./components/Menu";
+import AppStack from './pages/AppStack';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { IonMenu, IonHeader, IonToolbar, IonTitle, IonRouterOutlet } from '@ionic/react';
+import { IonIcon, IonContent, IonList, IonListHeader, IonItem, IonLabel, IonMenuToggle } from '@ionic/react';
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <IonApp>
+
+          <Menu />
+          <IonPage id="main">
+            <Switch>
+              {/*<Route path='/account' component={Account} />
+                <Route path="/tutorial" component={Tutorial} />
+                <Route path="/logout" />
+                <Route path="/login" component={Login} />
+                <Route path="/support" component={Support} />
+                <Route path="/signup" component={Signup} />*/}
+              <Route path="/" component={AppStack} />
+            </Switch>
+          </IonPage>
+
+        </IonApp>
+      </Router>
     );
   }
 }
