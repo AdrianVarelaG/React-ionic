@@ -15,5 +15,14 @@
 .error{
   color: #f04141;
   margin: 1rem 0 0 1rem;
+}
 
+.only-movile{
+  display: inherit;
+}
+
+@media  (min-width: 40rem){
+  .only-movile{
+    display: none;
+  }
 }

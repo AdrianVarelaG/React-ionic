@@ -1,0 +1,6 @@
+{
+  "appId": "com.softtek.react",
+  "appName": "IonicCamTest",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}
