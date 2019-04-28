@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@capacitor/cli": "^1.0.0-beta.19",
+    "@capacitor/core": "^1.0.0-beta.19",
+    "@ionic/pwa-elements": "^1.0.2",
     "@ionic/react": "0.0.5",
     "formik": "^1.5.1",
     "react": "^16.8.4",
@@ -13,8 +16,11 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "PORT=8000 react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start",
+    "start-sw": "serve -s build",
+    "build-sw": "node ./src/sw-build.js",
+    "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
+    "build": "react-scripts build && npm run build-sw",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -26,5 +32,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "serve": "^11.0.0",
+    "workbox-build": "^4.3.0"
+  }
 }

@@ -1,8 +1,10 @@
 import React from 'react';
 import SchedulePage from './SchedulePage.jsx';
+import CamTest from "./CamaraTest";
 
 import { IonTabs, IonTabButton, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonPage } from '@ionic/react';
 import { Route, Redirect } from 'react-router';
+import  "./Login.css";
 
 const AppStack = () => (
   <IonPage>
@@ -17,16 +19,18 @@ const AppStack = () => (
        */
     }
 
+    
     <IonTabs>
       <IonRouterOutlet>
         <Route path="/:tab(schedule)" component={SchedulePage} exact={true} />
-        {/*<Route path="/:tab(speakers)" component={SpeakerList} exact={true} />
-        <Route path="/:tab(speakers)/speaker/:id" component={SpeakerDetail} />
+        <Route path="/:tab(speakers)" component={CamTest} exact={true} />
+        {/*<Route path="/:tab(speakers)/speaker/:id" component={SpeakerDetail} />
         <Route path="/:tab(schedule|speakers)/sessions/:id" component={SessionDetail} />
         <Route path="/:tab(map)" component={MapView} />
   <Route path="/:tab(about)" component={About} />*/}
       </IonRouterOutlet>
-      <IonTabBar slot="bottom">
+      
+      <IonTabBar slot="bottom" class="only-movile">
         <IonTabButton tab="schedule" href="/schedule">
           <IonIcon name="calendar" />
           <IonLabel>Schedule</IonLabel>
@@ -44,6 +48,7 @@ const AppStack = () => (
           <IonLabel>About</IonLabel>
         </IonTabButton>
       </IonTabBar>
+
     </IonTabs>
   </IonPage>
 );
