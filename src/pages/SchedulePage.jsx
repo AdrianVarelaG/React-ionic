@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import "./Login.css";
 
 const initialValues = {
-    username: "",
+    username: "name@name.com",
     password: ""
 }
 
@@ -38,9 +38,7 @@ const SchedulePage = (props) => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                {<div className="logo">
-                    <img src="assets/img/appicon.svg" alt="Ionic logo" />
-                </div>}
+
                 <Formik initialValues={initialValues}
                     validationSchema={Yup.object({
                         username: Yup.string().email("Invalid email").required('Required'),
@@ -66,11 +64,13 @@ const SchedulePage = (props) => {
                                             }>Username</IonLabel>
                                             <IonInput
                                                 onIonChange={props.handleChange}
-                                                ionBlur={props.handleBlur}
+                                                onIonBlur={props.handleBlur}
                                                 {...field}
                                                 type="text"
                                                 autocapitalize="off"
                                                 value={props.values.username}
+                                                required={true}
+                                                readonly
                                             >
                                             </IonInput>
                                         </IonItem>
