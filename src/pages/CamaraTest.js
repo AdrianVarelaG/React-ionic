@@ -23,16 +23,34 @@ class camaraTest extends Component {
     this.canvasRef.current.width = width;
     this.canvasRef.current.height = height;
 
-    return setInterval( () =>{
+   // return setInterval( () =>{
       this.state.context.drawImage(this.videoRef.current, 0,0, width, height);
 
       let pixels = this.state.context.getImageData(0,0,width, height);
       //pixels = this.redEffect(pixels);
-      pixels = this.rgbSplit(pixels);
-      this.state.context.globalAlpha = 0.1;
-      this.state.context.putImageData(pixels, 0, 0);
+      //pixels = this.rgbSplit(pixels);
+      //this.state.context.globalAlpha = 0.1;
+      //this.state.context.putImageData(pixels, 0, 0);
 
-    }, 16);
+      let src = window.cv.matFromImageData(pixels);
+      let dst = new window.cv.Mat();
+      //src.convertTo(dst, window.cv.CV_8UC4);
+      window.cv.cvtColor(src, dst, window.cv.COLOR_RGBA2GRAY);
+
+      const array_new = new Uint8ClampedArray(dst.data, dst.cols, dst.rows)
+      console.log(array_new.length);
+      
+      let imgData = new ImageData(new Uint8ClampedArray(dst.data, dst.cols, dst.rows), dst.cols);
+      //this.state.context.putImageData(imgData, 0, 0);
+      let ctx = this.canvasRef.current.getContext("2d");
+      ctx.clearRect(0,0,this.canvasRef.current.width, this.canvasRef.current.height);
+      this.canvasRef.current.width = imgData.width;
+      this.canvasRef.current.height = imgData.height;
+      ctx.putImageData(imgData, 0, 0);
+
+
+
+    //}, 16);
 
   }
 
@@ -59,6 +77,10 @@ class camaraTest extends Component {
   }
 
   componentDidMount(){
+    this.waitForOpenCv();
+  }
+
+  videoInitialize(){
     navigator.mediaDevices.getUserMedia({video: true})
     .then(stream =>{
       console.log(stream);
@@ -72,6 +94,18 @@ class camaraTest extends Component {
       
     })
     this.setState({context: this.canvasRef.current.getContext("2d")} );
+  }
+
+  waitForOpenCv(){
+    console.log("Revisando", window.cv);
+    
+    if(!window.cv){
+      window.setTimeout(this.waitForOpenCv.bind(this), 100);
+    }else{
+      console.log("Inicializa");
+      
+      this.videoInitialize();
+    }
   }
 
 
@@ -89,7 +123,7 @@ class camaraTest extends Component {
         <IonContent>
           <div className="camera-content">
             <video ref={this.videoRef} onCanPlay={this.paintToCanvas} className="camera-video"></video>
-            <canvas ref={this.canvasRef} className="camera-canvas"></canvas>
+            <canvas id="canvasOutput" ref={this.canvasRef} className="camera-canvas"></canvas>
           </div>
         </IonContent>
       </Fragment>
