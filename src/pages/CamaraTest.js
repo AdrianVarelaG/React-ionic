@@ -32,6 +32,7 @@ class camaraTest extends Component {
       //this.state.context.globalAlpha = 0.1;
       //this.state.context.putImageData(pixels, 0, 0);
 
+      /* Intento manual
       let src = window.cv.matFromImageData(pixels);
       let dst = new window.cv.Mat();
       //src.convertTo(dst, window.cv.CV_8UC4);
@@ -47,6 +48,11 @@ class camaraTest extends Component {
       this.canvasRef.current.width = imgData.width;
       this.canvasRef.current.height = imgData.height;
       ctx.putImageData(imgData, 0, 0);
+      */
+     let dst = new window.cv.Mat();
+     let src = window.cv.matFromImageData(pixels);
+     window.cv.cvtColor(src, dst, window.cv.COLOR_RGBA2GRAY);
+     window.cv.imshow('canvasOutput', dst);
 
 
 
