@@ -5,7 +5,8 @@
   "dependencies": {
     "@capacitor/cli": "^1.0.0-beta.19",
     "@capacitor/core": "^1.0.0-beta.19",
-    "@ionic/pwa-elements": "^1.0.2",
+    "@ionic/core": "^4.4.2",
+    "@ionic/pwa-elements": "1.0.1",
     "@ionic/react": "0.0.5",
     "formik": "^1.5.1",
     "react": "^16.8.4",
@@ -16,6 +17,7 @@
     "yup": "^0.27.0"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "start-sw": "serve -s build",
     "build-sw": "node ./src/sw-build.js",
@@ -35,6 +37,7 @@
   ],
   "devDependencies": {
     "serve": "^11.0.0",
+    "source-map-explorer": "^1.8.0",
     "workbox-build": "^4.3.0"
   }
 }
