@@ -4,10 +4,11 @@ import "@ionic/core/css/core.css";
 import "@ionic/core/css/ionic.bundle.css";
 import "./theme.css";
 import Menu from "./components/Menu";
-import AppStack from './pages/AppStack';
+import AppStack from "./pages/AppStack";
 import Account from "./pages/Account/Account";
+import ImagesProcess from "./pages/ImagesProcess";
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -17,7 +18,8 @@ class App extends Component {
           <Menu />
           <IonPage id="main">
             <Switch>
-              <Route path='/account' component={Account} />
+              <Route path="/account" component={Account} />
+              <Route path="/support" component={ImagesProcess} />
               {/*  <Route path="/tutorial" component={Tutorial} />
                 <Route path="/logout" />
                 <Route path="/login" component={Login} />

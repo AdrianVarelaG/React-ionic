@@ -42,7 +42,10 @@
   <script>
     var Module = {
       wasmBinaryFile: '%PUBLIC_URL%/libs/opencv_js.wasm',
-      _main: function() {console.log("OpenCV is Ready");}
+      _main: function() {
+        window.openCvReady = true;
+        console.log("OpenCV is Ready");
+      }
     };
     </script>
     <script async src="%PUBLIC_URL%/libs/opencv.js"></script>
