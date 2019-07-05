@@ -39,14 +39,13 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
-  <script>
-    var Module = {
-      wasmBinaryFile: '%PUBLIC_URL%/libs/opencv_js.wasm',
-      _main: function() {
+  <script type="text/JavaScript">
+    function onOpenCvReady() { 
+      cv['onRuntimeInitialized']=()=>{
         window.openCvReady = true;
-        console.log("OpenCV is Ready");
-      }
-    };
+        console.log('OpenCV is Ready');
+        };
+    }
     </script>
-    <script async src="%PUBLIC_URL%/libs/opencv.js"></script>
+    <script async src="%PUBLIC_URL%/libs/opencv.js" onload="onOpenCvReady();" type="text/JavaScript"></script>
 </html>
